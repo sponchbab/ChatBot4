@@ -1,0 +1,14 @@
+# Ignore virtual environments
+.venv/
+env/
+
+# Python byte-compiled files
+__pycache__/
+*.pyc
+
+# PyCharm settings
+.idea/
+
+# General system files
+.DS_Store
+*.log
