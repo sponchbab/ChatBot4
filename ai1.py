@@ -5,6 +5,7 @@ import datetime
 import pyaudio
 import wikipedia
 import pywhatkit as pymus
+import gradio as gr
 
 # recognizer
 recognizer = sr.Recognizer()
@@ -41,10 +42,22 @@ def google_api():
 
     return text
 
+def gradio_chatbot(input_text):
+    return f"You said: {input_text}. How can I assist you further?"
+
+def launch_gradio():
+    gr.Interface(fn=gradio_chatbot, inputs="text", outputs="text", title="ChatGPT Interface").launch()
+
 def interactions():
     text = google_api()
 
-    if "joke" in text:
+    if "use web bot" in text:
+        engine.say("Launching Gradio interface")
+        engine.runAndWait()
+        launch_gradio()
+        text = "quit" #exits loop after launching gradio
+
+    elif "joke" in text:
         joke = pyjokes.get_joke()
         engine.say(joke)
         engine.runAndWait()
